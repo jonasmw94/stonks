@@ -6,7 +6,7 @@ app.config["MONGO_URI"] = "mongodb://localhost:27017/stonks"
 import datetime
 import markdown
 import os
-from token_handler import generate_token, decode_token, jsonify_token_response, token_required
+from token_handler.utils import generate_token, decode_token, jsonify_token_response, token_required
 from database.utils import check_user_login
 
 

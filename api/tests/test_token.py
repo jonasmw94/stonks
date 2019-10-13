@@ -1,7 +1,7 @@
 import pytest
 import datetime
 from main.main_app import app
-from token_handler import generate_token, decode_token
+from token_handler.utils import generate_token, decode_token
 
 @pytest.fixture
 def token():
