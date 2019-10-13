@@ -1,6 +1,6 @@
 import pytest
 import datetime
-from main import app
+from main.main_app import app
 from database import get_user, insert_user, mongo
 
 def finalize():

@@ -1,5 +1,5 @@
 from flask_pymongo import PyMongo
-from main import app
+from main.main_app import app
 from bcrypt import gensalt, hashpw
 
 mongo = PyMongo(app)
