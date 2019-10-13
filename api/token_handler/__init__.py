@@ -3,7 +3,7 @@ import jwt
 import datetime
 from functools import wraps
 
-def generate_token(username, secret):
+def generate_token(username: str, secret: str) -> str:
     return jwt.encode({ 'user': username, 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=30) }, secret, algorithm='HS256').decode('UTF-8')
 
 def decode_token(token, secret):
