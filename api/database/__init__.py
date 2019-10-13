@@ -1,5 +1,5 @@
 from flask_pymongo import PyMongo
-from api.main import app
+from main import app
 from bcrypt import gensalt, hashpw
 
 mongo = PyMongo(app)
@@ -21,7 +21,20 @@ def validate_password(password: str) -> bool:
 
     return True
 
-def get_user(username: str) -> str:
+def check_user_login(username: str, password: str) -> dict:
+    user = get_user(username)
+
+    if user == None:
+        return None
+
+    hashedpw = hashpw(password.encode("utf-8"), user['salt'])
+    
+    if hashedpw != user['hashedpw']:
+        return None
+
+    return user
+
+def get_user(username: str) -> dict:
     collection = mongo.db['users']
     user = collection.find_one({ 'user': username })
     return user
