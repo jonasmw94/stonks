@@ -2,9 +2,10 @@ from flask import jsonify, request
 import jwt
 import datetime
 from functools import wraps
+from main.main_app import app
 
 def generate_token(username: str, secret: str) -> str:
-    return jwt.encode({ 'user': username, 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=30) }, secret, algorithm='HS256').decode('UTF-8')
+    return jwt.encode({ 'user': username, 'exp' : datetime.datetime.utcnow() + datetime.timedelta(seconds=10) }, secret, algorithm='HS256').decode('UTF-8')
 
 def decode_token(token, secret):
     return jwt.decode(token, secret, algorithms=['HS256'])
