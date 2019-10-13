@@ -7,7 +7,7 @@ import datetime
 import markdown
 import os
 from token_handler import generate_token, decode_token, jsonify_token_response, token_required
-from database import check_user_login
+from database.utils import check_user_login
 
 
 

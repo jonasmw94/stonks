@@ -1,7 +1,7 @@
 import pytest
 import datetime
 from main.main_app import app
-from database import get_user, insert_user, mongo, check_user_login
+from database.utils import get_user, insert_user, mongo, check_user_login
 
 def finalize():
     mongo.db.drop_collection('users')
