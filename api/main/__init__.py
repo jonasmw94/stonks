@@ -6,6 +6,7 @@ from api.token import generate_token, decode_token, token_required
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'VERYSECRET!!!!!!!!'
+app.config["MONGO_URI"] = "mongodb://localhost:27017/stonks"
 
 @app.route("/")
 def index():

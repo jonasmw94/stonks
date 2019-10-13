@@ -3,3 +3,4 @@ pymongo
 markdown
 pyjwt
 pytest
+Flask-PyMongo
