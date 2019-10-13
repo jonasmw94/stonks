@@ -1,8 +1,15 @@
 from flask import Flask, jsonify, request, make_response
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'VERYSECRET!!!!!!!!'
+app.config["MONGO_URI"] = "mongodb://localhost:27017/stonks"
+
 import datetime
 import markdown
 import os
-from api.token import generate_token, decode_token, token_required
+from token_handler import generate_token, decode_token, jsonify_token_response, token_required
+from database import check_user_login
+
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'VERYSECRET!!!!!!!!'
@@ -24,6 +31,9 @@ def protected_route():
 def login():
     auth = request.authorization
 
-    if auth and auth.password == 'password':
-        return generate_token(auth.username, app.config['SECRET_KEY'])
+    if auth:
+        user = check_user_login(auth.username, auth.password)
+
+        if user != None:
+            return jsonify_token_response(generate_token(auth.username, app.config['SECRET_KEY']))
     return make_response('Could not verify!', 401, { 'WWW-Authenticate' : 'Basic realm="Login required"' })
