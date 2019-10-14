@@ -1,9 +1,25 @@
 version: '3.4'
 
 services:
+  mongo:
+    image: 'mongo:3.4.1'
+    ports:
+      - '27017:27017'
+    volumes:
+      - 'mongo:/data/db'
+    environment:
+      - SECRET_KEY_BASE=secret
+      - MONGO_URL=mongodb://mongo:27017/stonks
   device-registry:
     build: .
     volumes:
       - .:/usr/src/app
     ports:
-      - 5000:80
+      - 5000:5000
+    links:
+    - mongo
+    environment:
+      - SECRET_KEY_BASE=secret
+      - MONGO_URL=mongodb://mongo:27017/stonks
+volumes:
+  mongo:

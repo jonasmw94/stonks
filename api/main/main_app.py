@@ -1,20 +1,21 @@
 from flask import Flask, jsonify, request, make_response
+import os
+
+mongo_url = "mongodb://localhost:27017/stonks"
+if os.environ.get('MONGO_URL', False):
+    mongo_url = os.environ.get('MONGO_URL', False)
+
+print(mongo_url)
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'VERYSECRET!!!!!!!!'
-app.config["MONGO_URI"] = "mongodb://localhost:27017/stonks"
+app.config["MONGO_URI"] = mongo_url
 
 import datetime
 import markdown
-import os
 from token_handler.utils import generate_token, decode_token, jsonify_token_response, token_required
 from database.utils import check_user_login, insert_user
 import json
-
-
-
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'VERYSECRET!!!!!!!!'
-app.config["MONGO_URI"] = "mongodb://localhost:27017/stonks"
 
 @app.route("/", methods=['GET'])
 def index():
