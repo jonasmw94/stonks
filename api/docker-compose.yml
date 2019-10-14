@@ -7,9 +7,6 @@ services:
       - '27017:27017'
     volumes:
       - 'mongo:/data/db'
-    environment:
-      - SECRET_KEY_BASE=secret
-      - MONGO_URL=mongodb://mongo:27017/stonks
   device-registry:
     build: .
     volumes:
