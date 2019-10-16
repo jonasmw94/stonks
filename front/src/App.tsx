@@ -1,26 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect, useRef } from "react";
+import "./App.css";
+import Login from './components/landing';
 
-const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+interface Vanta {
+  NET: (arg: object) => { destroy: () => void };
 }
 
-export default App;
+declare global {
+  interface Window { VANTA: Vanta; }
+}
+
+window.VANTA = window.VANTA || {};
+
+type User = {
+  
+}
+
+export default () => {
+  const element = useRef<HTMLDivElement>(null);
+  const user = useState<null | User>(null);
+
+  useEffect(() => {
+    const effect = window.VANTA.NET({
+      el: element.current
+    })
+
+    setTimeout(() => {
+      effect.destroy();
+    },10000);
+  }, [])
+
+  if(!user) {
+    return (
+      <div ref={element}>
+        <Login />
+      </div>
+    );
+  }
+
+  return (
+    <div ref={element}>
+      <Login />
+    </div>
+  )
+}
