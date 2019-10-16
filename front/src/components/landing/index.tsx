@@ -13,10 +13,10 @@ export default function Login() {
           <SubHeaderText>- Betting the right way</SubHeaderText>
           <Button className={loginActive} onClick={() => setLoginActive("active")} >Get started</Button>
         </LeftContent>
-        <LeftContent style={{ borderLeft: "1px solid #fff", justifyContent: 'center' }} >
-            <Input placeholder="Username" />
-            <Input type="password" placeholder="Password" />
-            <Button>Login</Button>
+        <LeftContent style={{ borderLeft: "1px solid #fff", justifyContent: 'center', paddingLeft: 20 }} >
+            <Input style={{ marginTop: 10 }} placeholder="Username" />
+            <Input style={{ marginBottom: 0 }} type="password" placeholder="Password" />
+            <Button >Login</Button>
         </LeftContent>
       </ContentFrame>
     </Frame>
@@ -29,8 +29,7 @@ const Input = styled.input`
     border: none;
     height: 20px;
     padding: 10px;
-    margin-left: 20px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     font-size: 14px;
     text-align: center;
     border-radius: 4px;
@@ -38,7 +37,6 @@ const Input = styled.input`
 
 const Button = styled.button`
   background: transparent;
-  outline: none;
   border: 1px solid #fff;
   color: #fff;
 
