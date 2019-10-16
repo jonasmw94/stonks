@@ -1,19 +1,22 @@
-import React,{ useState } from "react";
+import React,{ useState, useEffect } from "react";
 import styled from "styled-components";
 import { Header, SubHeaderText } from "../text";
 
 export default function Login() {
-    const [loginActive, setLoginActive] = useState("")
-
+    const [loginActive, setLoginActive] = useState("");
+    
+    useEffect(() => {
+        setTimeout(() => setLoginActive("active"),1500)
+    },[]);
+    
   return (
     <Frame>
       <ContentFrame className={loginActive} >
-        <LeftContent>
+        <LeftContent style={{ marginRight: 10 }}>
           <Header>Stonks</Header>
           <SubHeaderText>- Betting the right way</SubHeaderText>
-          <Button className={loginActive} onClick={() => setLoginActive("active")} >Get started</Button>
         </LeftContent>
-        <LeftContent style={{ borderLeft: "1px solid #fff", justifyContent: 'center', paddingLeft: 20 }} >
+        <LeftContent style={{ borderLeft: "1px solid #fff", justifyContent: 'center', paddingLeft: 25 }} >
             <Input style={{ marginTop: 10 }} placeholder="Username" />
             <Input style={{ marginBottom: 0 }} type="password" placeholder="Password" />
             <Button >Login</Button>
