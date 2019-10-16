@@ -1,46 +1,45 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
-import Login from './components/landing';
+import Landing from "./components/landing";
 
 interface Vanta {
   NET: (arg: object) => { destroy: () => void };
 }
 
 declare global {
-  interface Window { VANTA: Vanta; }
+  interface Window {
+    VANTA: Vanta;
+  }
 }
 
 window.VANTA = window.VANTA || {};
 
-type User = {
-  
-}
+type User = {};
 
 export default () => {
   const element = useRef<HTMLDivElement>(null);
-  const user = useState<null | User>(null);
+  const [user, setUser] = useState<null | User>(null);
+  const [net, setNet] = useState<null | { destroy: () => void }>(null);
 
   useEffect(() => {
     const effect = window.VANTA.NET({
       el: element.current
-    })
+    });
 
-    setTimeout(() => {
-      effect.destroy();
-    },10000);
-  }, [])
+    setNet(effect);
+  }, []);
 
-  if(!user) {
+  if (!user) {
     return (
       <div ref={element}>
-        <Login />
+        <Landing />
       </div>
     );
   }
 
   return (
     <div ref={element}>
-      <Login />
+      <Landing />
     </div>
-  )
-}
+  );
+};
