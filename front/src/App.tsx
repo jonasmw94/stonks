@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
 import Landing from "./components/landing";
+import Home from "./components/dashboard";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 interface Vanta {
   NET: (arg: object) => { destroy: () => void };
@@ -14,7 +16,7 @@ declare global {
 
 window.VANTA = window.VANTA || {};
 
-type User = {};
+type User = {  };
 
 export default () => {
   const element = useRef<HTMLDivElement>(null);
@@ -32,14 +34,21 @@ export default () => {
   if (!user) {
     return (
       <div ref={element}>
-        <Landing />
+        <Landing
+          login={(username: string, password: string) => {
+            setUser({});
+            if (net) net.destroy();
+          }}
+        />
       </div>
     );
   }
 
   return (
-    <div ref={element}>
-      <Landing />
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/dashboard" component={Home} />
+      </Switch>
+    </Router>
   );
 };
